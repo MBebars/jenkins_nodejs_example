@@ -36,7 +36,7 @@ pipeline {
             steps {
                 /* groovylint-disable-next-line DuplicateMapLiteral, LineLength */
                 withCredentials([usernamePassword(credentialsId: 'MBebarsDocker', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                    sh 'docker rm -f jenkins_example'
+                /*    sh 'docker rm -f jenkins_example' */
                     sh 'docker run -d -p 3000:3000 --name jenkins_example ${USER}/nodejs_sample:v2.${BUILD_NUMBER}'
                 }
             }
@@ -48,7 +48,16 @@ pipeline {
                 channel: "jenkins",
                 color: "good",
                 /* groovylint-disable-next-line LineLength */
-                message: "${env.JOB_NAME} is successfully with build no. ${env.BUILD_NUMBER} URL: (<${env.BUILD_URL}|Open>) ${BUILD_STATUS}"
+                message: "${env.JOB_NAME} is successfully with build no. ${env.BUILD_NUMBER} URL: (<${env.BUILD_URL}|Open>) ${env.BUILD_STATUS}"
+            )
+        }
+
+        failure {
+            slackSend(
+                channel: "jenkins",
+                color: "danger",
+                /* groovylint-disable-next-line LineLength */
+                message: "${env.JOB_NAME} is failure with build no. ${env.BUILD_NUMBER} URL: (<${env.BUILD_URL}|Open>) ${env.BUILD_STATUS}"
             )
         }
     }
