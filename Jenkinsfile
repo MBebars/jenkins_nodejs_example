@@ -36,7 +36,7 @@ pipeline {
             steps {
                 /* groovylint-disable-next-line DuplicateMapLiteral, LineLength */
                 withCredentials([usernamePassword(credentialsId: 'MBebarsDocker', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                /*    sh 'docker rm -f jenkins_example' */
+                    sh 'docker rm -f jenkins_example'
                     sh 'docker run -d -p 3000:3000 --name jenkins_example ${USER}/nodejs_sample:v2.${BUILD_NUMBER}'
                 }
             }
