@@ -25,9 +25,9 @@ pipeline {
             steps {
                 /* groovylint-disable-next-line GStringExpressionWithinString, LineLength */
                 withCredentials([usernamePassword(credentialsId: 'MBebarsDocker', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                    sh 'docker build . -f Dockerfile -t ${USER}/nodejs_sample:v1.${BUILD_NUMBER}'
+                    sh 'docker build . -f Dockerfile -t ${USER}/nodejs_sample:v2.${BUILD_NUMBER}'
                     sh 'docker login -u ${USER} -p ${PASS}'
-                    sh 'docker push ${USER}/nodejs_sample:v1.${BUILD_NUMBER}'
+                    sh 'docker push ${USER}/nodejs_sample:v2.${BUILD_NUMBER}'
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
                 /* groovylint-disable-next-line DuplicateMapLiteral, LineLength */
                 withCredentials([usernamePassword(credentialsId: 'MBebarsDocker', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                     sh 'docker rm -f jenkins_example'
-                    sh 'docker run -d -p 3000:3000 --name jenkins_example ${USER}/nodejs_sample:v1.${BUILD_NUMBER}'
+                    sh 'docker run -d -p 3000:3000 --name jenkins_example ${USER}/nodejs_sample:v2.${BUILD_NUMBER}'
                 }
             }
         }
