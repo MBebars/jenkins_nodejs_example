@@ -62,5 +62,3 @@ pipeline {
         }
     }
 }
-
-/* TEST WEBHOOK */
