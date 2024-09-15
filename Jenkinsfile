@@ -1,6 +1,6 @@
 /* groovylint-disable GStringExpressionWithinString */
 pipeline {
-    agent { label 'master' }
+    agent { label 'ec2' }
 
     options {
         // This is required if you want to clean before build
