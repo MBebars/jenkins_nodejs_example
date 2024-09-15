@@ -44,11 +44,11 @@ pipeline {
     }
     post{
         success {
-            slackSend (
+            slackSend(
                 channel: "jenkins",
                 color: "good",
                 /* groovylint-disable-next-line LineLength */
-                message "${env.JOB_NAME} is successfully with build no. ${env.BUILD_NUMBER} URL: (<${env.BUILD_URL}|Open>) ${BUILD_STATUS}"
+                message: "${env.JOB_NAME} is successfully with build no. ${env.BUILD_NUMBER} URL: (<${env.BUILD_URL}|Open>) ${BUILD_STATUS}"
             )
         }
     }
