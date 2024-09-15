@@ -48,7 +48,11 @@ pipeline {
                 channel: "jenkins",
                 color: "good",
                 /* groovylint-disable-next-line LineLength */
-                message: "${env.JOB_NAME} is successfully with build no. ${env.BUILD_NUMBER} URL: (<${env.BUILD_URL}|Open>) Build status is ${currentBuild.currentResult}"
+                message: """
+                ${env.JOB_NAME} is successfully with build no. ${env.BUILD_NUMBER} URL: (<${env.BUILD_URL}|Open>)
+                Build status is ${currentBuild.currentResult}
+                 The pipeline is running on agent: ${agentName}
+                """
             )
         }
 
@@ -57,7 +61,11 @@ pipeline {
                 channel: "jenkins",
                 color: "danger",
                 /* groovylint-disable-next-line LineLength */
-                message: "${env.JOB_NAME} is failure with build no. ${env.BUILD_NUMBER} URL: (<${env.BUILD_URL}|Open>) Build status is ${currentBuild.currentResult}"
+                message: """
+                ${env.JOB_NAME} is failure with build no. ${env.BUILD_NUMBER} URL: (<${env.BUILD_URL}|Open>)
+                Build status is ${currentBuild.currentResult}
+                 The pipeline is running on agent: ${agentName}
+                """
             )
         }
     }
